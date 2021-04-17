@@ -1,35 +1,55 @@
 package main.java.com.classes.hillel;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter text:");
+        System.out.println("Enter the size of an array:");
         Scanner input = new Scanner(System.in);
-        String[] text = input.nextLine().split(" ");
+        int size = input.nextInt();
 
-        String[] symbols = {".", ",", ":", ";", "-", "!", "?", "'"};
+        int[] nums = new int[size];
 
-        int counter = 0;
-        int flag = 1;
+        setValues(nums);
+        getValues(nums, "Before sort: ");
+        int[] numsSorted = sort(nums);
+        getValues(numsSorted, "After sort: ");
 
-        for (int i = 0; i < text.length; i++){
-            for (int k = 0; k < symbols.length-1; k++){
-                if (text[i].equals(symbols[k])){
-                    flag *= 0;
-                }else{
-                    continue;
-                }
-            }
-            if (flag!=0){
-                counter++;
-            }
-        }
-
-        System.out.println("Number of words in your text: " + counter);
 
     }
+
+    private static void setValues(int[] array){
+        Scanner input = new Scanner(System.in);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Enter a number:");
+            array[i] = input.nextInt();
+        }
+    }
+
+    private static void getValues(int[] array, String message){
+        System.out.print(message);
+        for (int i = 0; i < array.length; i++){
+            System.out.print(array[i] + " ");
+        }
+        System.out.print("\n");
+    }
+
+    private static int[] sort(int[] array){
+        for (int k = 0; k < array.length; k++) {
+            for (int i = 1; i < array.length; i++) {
+                if (array[i - 1] > array[i]) {
+                    int a = array[i - 1];
+                    int b = array[i];
+                    array[i] = a;
+                    array[i - 1] = b;
+                }
+            }
+        }
+        return array;
+    }
+
 
 }
